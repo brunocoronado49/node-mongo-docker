@@ -1,0 +1,21 @@
+version: "3" # Version of docker-compose
+
+# Imagenes o contenedores que creamos
+services:
+  web: 
+    container_name: exampleapp
+    restart: always
+    build: .
+    ports: 
+      - 5000:3000
+    links: 
+      - mongo
+    # Los columenes copian archivos dentro del contenedor y viceversa
+    volumes:
+      - .:/app
+
+  mongo:
+    container_name: mymongo
+    image: mongo
+    ports:
+      - "27018:27017"
